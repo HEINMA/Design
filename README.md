@@ -32,4 +32,6 @@ HEINMA is a open source Health Information Management System to be developed wit
 
 12. Radiology service
 
+13. Common Libry Common libry for logs and vulnarability supression etc.
 
+14. Pipeline config (Configurations required for pipelines)
