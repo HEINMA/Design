@@ -175,3 +175,90 @@ approach can accelerate development
 cycles and provide a more agile approach to
 addressing user requirements.
 
+## CONSISTENCY VERSUS AVAILABILITY
+A consideration of the architectural differences
+between relational and non-relational databases
+would not be complete without the CAP
+theorem. The CAP theorem was formulated by
+Eric Brewer in 2000, as a way of expressing
+the key tradeoffs in distributed systems. The
+CAP theorem states that it is impossible for a
+distributed data store to provide more than two
+of the following three guarantees:
+
+* Consistency: Every read receives either the
+most recent write or an error.
+* Availability: Every request receives a response
+that is not an error, but with no guarantee that
+it contains the most recent write.
+* Partition Tolerance: The system continues to
+operate even when an arbitrary number of
+messages are delayed, dropped or reordered
+among nodes.
+
+Another way of putting this is that the CAP
+theorem dictates that any data store brings
+with it a fundamental trade-off. As such, many
+databases are referred to as CP (consistent
+and partition tolerance, but not available)
+or AP (available and partition-tolerant, but
+not consistent). In CAP terms, the critical
+trade-off that distinguishes relational and non-
+relational data stores is between availability and
+consistency. SQL data stores sacrifice availability
+in favor of data consistency. NoSQL data stores
+sacrifice consistency in favor of availability.
+
+It is important to note that the CAP theorem
+has come under significant criticism. Martin
+Kleppmann, in particular, has written a
+comprehensive Critique of the CAP Theorem.
+So, it is important to keep in mind that the
+theorem is merely a simplified model for
+understanding a very complex topic.
+
+
+## ACID VERSUS BASE CONSISTENCY
+One of the defining tradeoffs between relational
+and non-relational datastores is in the type
+of consistency that they provide. In simple
+terms, RDBMS provides strong consistency,
+while NoSQL databases provide a weaker form.
+Consistency in general refers to a database’s
+ability to process concurrent transactions while
+preserving the integrity of the data. Somewhat
+confusingly, ‘consistency’ as defined in the
+CAP theorem has a different, though related,
+meaning than the consistency discussed in this
+section. The definition used by Brewer in the
+CAP theorem derives from distributed systems
+theory, while the definition used in this section
+derives from database theory.
+
+7
+In simple terms, consistency is a guarantee that
+a read should return the result of the latest
+successful write. This seems simple, but such
+a guarantee is incredibly difficult to deliver
+without impacting the performance of the
+system as a whole. In a relational database,
+a single data item is actually split across
+independent registers that must agree with one
+another. Thus, a single database write is actually
+decomposed into several small writes to these
+registers, which must be completed and visible
+when the read is executed. With concurrent
+operations running against the database, the
+semblance of order between the group of
+sub-operations needs to be maintained; the
+concurrent operations must be atomic. ACID
+consistency means the rules of relations must
+be satisfied. In a globally distributed database
+topology, which involves multiple clusters
+each containing many nodes the problem
+of consistency becomes exponentially more
+complex.
+
+
+
+
