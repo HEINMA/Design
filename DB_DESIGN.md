@@ -2,7 +2,7 @@
 In health care industry lot of informations are updated regularly. To make system are not absoleete with the time , those are needed to capable to add defferent ifnormtions and data to database simply.
 But sql databases are basically relation oriented. It is required regid database architecture. 
 
-Some Informations are taken from following url and you can register and access scylladb white papers regarding nosql database.
+These Informations about no-sql databases are taken from following url and you can register and access scylladb white papers regarding nosql database.
 
 https://lp.scylladb.com/sql-to-nosql-architecture-wp-thanks.html
 
@@ -258,6 +258,155 @@ topology, which involves multiple clusters
 each containing many nodes the problem
 of consistency becomes exponentially more
 complex.
+
+ACID is more descrivbed in the white paper but not to be abbrivated hear.
+
+By their nature, ACID-compliant databases are
+generally slow, difficult to scale, and expensive
+to run and maintain. It should be noted some
+RDBMS systems enable performance to be
+improved by relaxing ACID guarantees. Still,
+all SQL databases are ACID compliant to
+varying degrees, and as such, they all share
+this downside. The practical effect of ACID
+compliance is to make it extraordinarily difficult
+and expensive to achieve resilient, distributed
+SQL database deployments.
+
+In contrast to RDBMS’ ACID guarantees, NoSQL
+databases provide so-called ‘BASE guarantees.’
+BASE enables availability and relaxes the
+stringent consistency. The acronym BASE
+designates:
+*  Basic Availability: Data is available most of
+the time, even during a partial system failure.
+*  Soft state: Individual data items are
+independent and do not have to be consistent
+with each other.
+*  Eventual consistency: Data will become
+consistent at some unspecified point in the
+future.
+
+As such, NoSQL databases sacrifice a degree
+of consistency in order to increase availability.
+Rather than providing strong consistency,
+NoSQL databases generally provide eventual
+consistency. A data store that provides
+BASE guarantees can occasionally fail to
+return the result of the latest write, providing
+different answers to applications making
+requests. Developers building applications
+against eventually consistent data stores
+often implement consistency checks in their
+application code.
+
+## Lightweight transactions
+In a traditional SQL RDBMS, a “transaction”
+is a logical unit of work — a group of tasks
+that provides the ACID guarantees discussed
+above. To compensate for relaxed consistency,
+some NoSQL databases offer ‘lightweight
+transactions’ (LWTs).
+Lightweight transactions are limited to a single
+conditional statement, which enables an atomic
+“compare and set” operation. Such an operation
+checks whether a condition is true before it
+conducts the transaction. If the condition is not
+met, the transaction is not executed. (For this
+reason, LWTs are sometimes called ‘conditional
+statements’). LWTs do not truly lock the
+database for the duration of the transaction;
+they only ‘lock’ a single cell or row. LWTs
+leverage a consensus protocol such as Paxos
+to ensure that all nodes in the cluster agree
+the change is committed. In this way, LWTs can
+provide sufficient consistency for applications
+that require the availability and resilience of a
+distributed database.
+
+
+## QUERY LANGUAGES: SQL VERSUS CQL
+As we’ve noted, relational databases are defined
+in part by their use of the Structured Query
+Language (SQL). In contrast, NoSQL databases
+employ a host of alternative query languages
+that have been designed to support diverse
+application use cases. A partial list includes
+MongoDB Query Language (MQL), Couchbase’s
+N1QL, Elasticsearch’s Query DSL, Microsoft
+Azure’s Cosmos DB query language, and
+Cassandra Query Language (CQL).
+
+## Limitations in CQL
+SQL and CQL share similar statements to store
+and modify data, such as Create, Alter, Drop, and
+Truncate commands, but unlike SQL, CQL is not
+designed to support joins between tables. In CQL,
+relations are implemented within the application,
+rather than within the database query.
+
+## Values versus objects
+Query results are also returned differently. SQL
+natively returns data-typed values, usually to
+be read into an object one field at a time. In
+contrast, CQL natively returns complete objects,
+often serialized in extensible markup language
+(XML) or Javascript object notation (JSON). This
+makes applications responsible for parsing these
+objects to obtain the desired result of a query.
+
+
+## Scaling characteristics
+In NoSQL, data is stored across nodes in a
+cluster based on a token range, which is a
+hashed value of the primary key. By using token
+ranges, NoSQL databases enable objects to
+be stored on different nodes. CQL queries are
+inherently more scalable than SQL queries,
+having been specifically designed to query
+across a horizontally distributed cluster of
+servers, rather than a single database at a time.
+
+When migrating from SQL to NoSQL, the
+primary key in the relational table becomes the
+partition key in the NoSQL table. If the RDBMS
+table must be joined to additional tables to
+retrieve the business object, those closely
+related tables should combine into a single
+NoSQL table. The NoSQL cluster ordering key
+determines the physical order of records, so it
+should be a unique value (often a composite
+value) that would be useful for searching
+
+
+
+![no sql partition](images/no-sql-02.png?raw=true "https://scylladb.drift.click/wp-sql-nosql")
+
+## QUERY PATTERNS
+Relational databases are organized around data
+structures and relationships. In contrast, NoSQL
+databases are organized around query patterns.
+As noted above, the NoSQL partition key can
+be mapped to a primary key in an RDBMS.
+
+Secondary keys and indexes can be added
+later. A UNIQUE constraint in a SQL database
+becomes a good candidate for a cluster
+ordering key in NoSQL.
+
+
+Scylladb white paper discuss more about no sql database migration from sql to no sql and node repaire etc.
+
+But according to HEINMA requirement we need to avoide being absoleete our system over the time due to change of information. So we have decided to go for nosql database. Even now we have pioratized the consistancy over availability due to this is a health information management system. 
+
+It was considered the popularity of the solution, being a open source solution and the available free supoort for the development. So Mongo DB and Apache Cassendra was amoong final two selections.
+
+Comparison between MongoDB and casendra is as follows.
+
+https://www.knowledgehut.com/blog/data-science/cassandra-vs-mongodb
+
+
+
 
 
 
