@@ -407,6 +407,21 @@ https://www.knowledgehut.com/blog/data-science/cassandra-vs-mongodb
 
 
 
+## Maria DB.
+
+https://kinsta.com/blog/open-source-database/
+
+
+Although MariaDB is a fork of MySQL, it still looks to forge its path. There are a few unique features of the open source database that you should know:
+
+    MariaDB uses the Aria storage engine to handle complex SQL queries. This gives the database a speed boost over MySQL.
+    You can use dynamic rows for table columns, which helps flexibility and adaptability.
+    There are some specialized storage engines for specific use cases that you won’t find in MySQL. For example, you can implement distributed storage, distributed transactions, and much more.
+
+
+
+So it was decided to use maria db due to helth care queries can be operated with well structured relational manner.
+
 
 
 
